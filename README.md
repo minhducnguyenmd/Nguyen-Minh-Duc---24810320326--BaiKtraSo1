@@ -37,21 +37,12 @@ p.Name = "Nguyen Van B"; // Hợp lệ
 
 ---
 
-##Câu 3: Phân biệt sự khác nhau giữa phương thức virtual ở lớp cha và phương thức override ở lớp con khi triển khai tính Đa hình (Polymorphism)
+### Câu 3: Phân biệt `virtual` (lớp cha) và `override` (lớp con) trong Đa hình
 
-- Virtual (ở lớp cha):
-
-+ Khai báo một phương thức kèm theo hành vi mặc định.
-
-+ Từ khóa virtual đóng vai trò cấp quyền (cho phép) cho các lớp con được phép ghi đè/thay đổi hành vi của phương thức này nếu cần.
-
-- Override (ở lớp con):
-
-+ Khai báo ở lớp con để thực sự ghi đè (định nghĩa lại) hành vi của phương thức virtual nhận từ lớp cha.
-
-+ Khi gọi phương thức qua một tham chiếu kiểu lớp cha nhưng trỏ đến đối tượng lớp con, phiên bản override ở lớp con sẽ được ưu tiên thi hành (Dynamic Dispatch / Late Binding).
-
-```C#
+* **`virtual` (Lớp cha):** Khai báo một phương thức kèm hành vi mặc định, đồng thời **cho phép** các lớp con được quyền thay đổi (ghi đè) hành vi đó.
+* **`override` (Lớp con):** Đặt ở lớp con để **thực sự thay thế** (ghi đè) lại hành vi của phương thức `virtual` từ lớp cha.
+> 
+```
 public class Animal
 {
     public virtual void Speak() => Console.WriteLine("Animal sound");
@@ -64,13 +55,7 @@ public class Dog : Animal
 ```
 ---
 
-##Câu 4: Tại sao một thành phần được khai báo là static trong Lớp (Class) lại không thể truy xuất thông qua một thể hiện (Object Instance) được tạo bằng toán tử new?
-Thành phần static (biến, phương thức, thuộc tính) thuộc về bản thân Lớp (Class level) chứ không thuộc về thể hiện cụ thể nào của lớp (Instance level).
+### Câu 4: Tại sao không thể gọi thành phần `static` từ một đối tượng (`new`)?
 
-- Về cơ chế bộ nhớ: Thành phần static được khởi tạo và lưu trữ tại một vùng nhớ dùng chung duy nhất (Static Heap) ngay khi Lớp được nạp vào bộ nhớ. Tất cả các đối tượng tạo bằng new đều chia sẻ chung thành phần này, nó không nằm bên trong vùng nhớ của từng thể hiện riêng biệt.
-
-- Về quy tắc thiết kế C#: Ngôn ngữ C# quy định bắt buộc truy xuất thành phần static qua tên lớp (Ví dụ: ClassName.StaticMethod()) nhằm:
-
-+ Tránh gây nhầm lẫn về phạm vi dữ liệu (giúp lập trình viên nhận biết rõ đây là hành vi/dữ liệu dùng chung, không phụ thuộc vào trạng thái riêng của đối tượng).
-
-+ Tăng tính tường minh cho mã nguồn và hỗ trợ trình biên dịch tối ưu hóa mã lệnh.
+* **Lý do bộ nhớ:** Thành phần `static` thuộc về **toàn bộ Lớp (Class)** chứ không thuộc về từng đối tượng riêng lẻ. Nó được tạo ra một lần duy nhất ở vùng nhớ chung ngay khi chương trình chạy.
+* **Lý do thiết kế:** C# bắt buộc gọi qua tên lớp (ví dụ: `ClassName.Method()`) để code rõ ràng, tránh nhầm lẫn giữa **dữ liệu dùng chung** của Class và **dữ liệu riêng** của từng đối tượng.
